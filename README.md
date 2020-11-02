@@ -1,5 +1,8 @@
 # Transport Optimum
 
+# Purpose:
+The purpose of this application is to calculate the price + route of a transport delivery and display in depth information to the user.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
