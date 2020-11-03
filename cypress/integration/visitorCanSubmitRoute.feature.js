@@ -19,17 +19,12 @@ describe("visitor can submit route", () => {
       cy.get("[data-cy='destination']").type("Orebro");
       cy.get("[data-cy='submit-route']").click();
     });
-  });
-
-  context("successfully created route", () => {
-    it("displays the correct route information", () => {
       cy.get("[data-cy='route-information']").within(() => {
         cy.get("[data-cy='route-message']").should("contain", "Your route")
         cy.get("[data-cy='origin']").should("contain", "Stockholm");
         cy.get("[data-cy='destination']").should("contain", "Orebro");
         cy.get("[data-cy='route-distance']").should("contain", "193 km");
         cy.get("[data-cy='route-time']").should("contain", "2h 45min")
-      });
     });
   });
 });
