@@ -1,11 +1,11 @@
 describe("visitor can submit route", () => {
   beforeEach(() => {
     cy.server();
-    // cy.route({
-    //   method: "POST",
-    //   url: "http://localhost:3000",
-    //   response: "fixture:stockholmOrebroResponse.json",
-    // });
+    cy.route({
+      method: "POST",
+      url: "http://localhost:3001",
+      response: "fixture:stockholmOrebroResponse.json",
+    });
     cy.visit("/");
   });
 
@@ -22,11 +22,23 @@ describe("visitor can submit route", () => {
 
     cy.get("[data-cy='route-information']").within(() => {
       cy.get("[data-cy='confirmation-message']").within(() => {
-        cy.get("[data-cy='origin2']").should("contain", "Stockholm");
-        cy.get("[data-cy='destination2']").should("contain", "Örebro");
-        cy.get("[data-cy='route-distance2']").should("contain", "202 km");
-        cy.get("[data-cy='route-time2']").should("contain", "2 hours 12 min");
+        cy.get("[data-cy='from']").should("contain", "Stockholm");
+        cy.get("[data-cy='to']").should("contain", "Örebro");
+        cy.get("[data-cy='route-distance']").should("contain", "202 km");
+        cy.get("[data-cy='route-time']").should("contain", "2 hours 12 min");
       });
     });
+  });
+
+  it("invalid location", () => {
+    cy.get('[data-cy="route-form"]').within(() => {
+      cy.get('[data-cy="origin"]').type("Orebronx");
+      cy.get('[data-cy="destination"]').type("Gothenburg");
+      cy.get('[data-cy="submit-route"]').click();
+    });
+    cy.get('[data-cy="message"]').should(
+      "contain",
+      "Invalid Location. Please try again."
+    );
   });
 });

@@ -26,10 +26,10 @@ const RouteForm = () => {
         <Message data-cy="route-information">
           <Message.Header data-cy="confirmation-message">
             Your route
-            <div data-cy='origin2'>Starting point: {routeInformation.start_address}</div>
-            <div data-cy='destination2'>Destination: {routeInformation.end_address}</div>
-            <div data-cy='route-distance2'>Distance: {routeInformation.distance.text}</div>
-            <div data-cy='route-time2'>Duration: {routeInformation.duration.text}</div>
+            <div data-cy='from'>Starting point: {routeInformation.start_address}</div>
+            <div data-cy='to'>Destination: {routeInformation.end_address}</div>
+            <div data-cy='route-distance'>Distance: {routeInformation.distance.text}</div>
+            <div data-cy='route-time'>Duration: {routeInformation.duration.text}</div>
           </Message.Header>
         </Message>
       )}
