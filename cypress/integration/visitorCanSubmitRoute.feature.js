@@ -1,11 +1,11 @@
 describe("visitor can submit route", () => {
   beforeEach(() => {
     cy.server();
-    cy.route({
-      method: "POST",
-      url: "http://localhost:3000",
-      response: "fixture:stockholmOrebroResponse.json",
-    });
+    // cy.route({
+    //   method: "POST",
+    //   url: "http://localhost:3000",
+    //   response: "fixture:stockholmOrebroResponse.json",
+    // });
     cy.visit("/");
   });
 
@@ -19,12 +19,12 @@ describe("visitor can submit route", () => {
       cy.get("[data-cy='destination']").type("Orebro");
       cy.get("[data-cy='submit-route']").click();
     });
-      cy.get("[data-cy='route-information']").within(() => {
-        cy.get("[data-cy='route-message']").should("contain", "Your route")
-        cy.get("[data-cy='origin']").should("contain", "Stockholm");
-        cy.get("[data-cy='destination']").should("contain", "Orebro");
-        cy.get("[data-cy='route-distance']").should("contain", "193 km");
-        cy.get("[data-cy='route-time']").should("contain", "2h 45min")
+    cy.get("[data-cy='route-information']").within(() => {
+      cy.get("[data-cy='confirmation-message']").should("contain", "Your route")
+      cy.get("[data-cy='origin']").should("contain", "Stockholm");
+      cy.get("[data-cy='destination']").should("contain", "Orebro");
+      cy.get("[data-cy='route-distance']").should("contain", "193 km");
+      cy.get("[data-cy='route-time']").should("contain", "2h 45min")
     });
   });
 });

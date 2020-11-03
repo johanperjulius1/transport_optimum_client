@@ -1,8 +1,9 @@
-import React from "react";
-import { Button, Form, Container } from "semantic-ui-react";
+import React, { useState } from "react";
+import { Button, Form, Container, Message } from "semantic-ui-react";
 import axios from "axios";
 
 const RouteForm = () => {
+  const [confirmationMessage, setConfirmationMessage] = useState([])
   const postRoute = async (event) => {
     event.preventDefault();
     debugger
@@ -16,6 +17,7 @@ const RouteForm = () => {
       const response = await axios.post(
         `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&key=${apiKey}`
       );
+      setMessage[response.data.routes[0].legs[0].start_address]
       debugger
     } catch(error) {
       debugger
@@ -24,6 +26,11 @@ const RouteForm = () => {
 
   return (
     <Container>
+      {confirmationMessage && (
+        <Message data-cy='confirmation-message'>
+          <Message.header>{confirmationMessage}. Your route</Message.header>
+        </Message>
+      )}
       <Form data-cy="route-form" onSubmit={(event) => postRoute(event)}>
         <Form.Input
           label="From:"
