@@ -4,7 +4,7 @@ describe("visitor can submit route", () => {
     cy.route({
       method: "POST",
       url: "http://localhost:3000",
-      response: "",
+      response: "fixture:stockholmOrebroResponse.json",
     });
     cy.visit("/");
   });
