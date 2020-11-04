@@ -28,19 +28,19 @@ const RouteForm = () => {
   return (
     <Container>
       {routeInformation && (
-        <Message data-cy="route-information">
-          <Message.Header data-cy="confirmation-message">
-            Your route
-            <div data-cy="origin">
-              Starting point: {routeInformation.start_address}
+        <Message className="hej" data-cy="route-information">
+          <Message.Header className="route" data-cy="confirmation-message">
+            Your route:
+            <div className="origin" data-cy="origin">
+              Starting point - {routeInformation.start_address}
             </div>
-            <div data-cy="destination">
-              Destination: {routeInformation.end_address}
+            <div className="destination" data-cy="destination">
+              Destination - {routeInformation.end_address}
             </div>
-            <div data-cy="route-distance">
+            <div className="route-distance" data-cy="route-distance">
               Distance: {routeInformation.distance.text}
             </div>
-            <div data-cy="route-time">
+            <div className="route-time" data-cy="route-time">
               Duration: {routeInformation.duration.text}
             </div>
           </Message.Header>

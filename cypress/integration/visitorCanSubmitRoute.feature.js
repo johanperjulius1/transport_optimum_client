@@ -35,7 +35,8 @@ describe("visitor can submit route", () => {
     beforeEach(() => {
       cy.route({
         method: "POST",
-        url: "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=Stockholm&destination=sajelgskjbg&key=AIzaSyAwzUCN-8dHZY6cMYq-zqL_Q9qY_8O9qlw",
+        url:
+          "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=Stockholm&destination=sajelgskjbg&key=AIzaSyAwzUCN-8dHZY6cMYq-zqL_Q9qY_8O9qlw",
         response: { message: "Cannot find location." },
         status: 404,
       });
@@ -49,7 +50,10 @@ describe("visitor can submit route", () => {
       });
 
       cy.get("[data-cy='failure-message']").within(() => {
-        cy.get("[data-cy='fail-message']").should("contain", "Cannot find location.");
+        cy.get("[data-cy='fail-message']").should(
+          "contain",
+          "Cannot find location."
+        );
       });
     });
   });
