@@ -1,11 +1,12 @@
 describe("visitor can submit route", () => {
   beforeEach(() => {
     cy.server();
-    // cy.route({
-    //   method: "POST",
-    //   url: "http://localhost:3000",
-    //   response: "fixture:stockholmOrebroResponse.json",
-    // });
+    cy.route({
+      method: "POST",
+      url:
+        "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=Stockholm&destination=Orebro&key=AIzaSyAwzUCN-8dHZY6cMYq-zqL_Q9qY_8O9qlw",
+      response: "fixture:stockholmOrebroResponse.json",
+    });
     cy.visit("/");
   });
 
@@ -29,6 +30,27 @@ describe("visitor can submit route", () => {
       });
     });
   });
-});
 
-// const [message, setMessage] = useState()
+  context("Unsuccessfully", () => {
+    beforeEach(() => {
+      cy.route({
+        method: "POST",
+        url: "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=Stockholm&destination=sajelgskjbg&key=AIzaSyAwzUCN-8dHZY6cMYq-zqL_Q9qY_8O9qlw",
+        response: { message: "Cannot find location." },
+        status: 404,
+      });
+    });
+
+    it("Unsuccessfully", () => {
+      cy.get("[data-cy='route-form']").within(() => {
+        cy.get("[data-cy='formOrigin']").type("Stockholm");
+        cy.get("[data-cy='formDestination']").type("sajelgskjbg");
+        cy.get("[data-cy='submit-route']").click();
+      });
+
+      cy.get("[data-cy='failure-message']").within(() => {
+        cy.get("[data-cy='fail-message']").should("contain", "Cannot find location.");
+      });
+    });
+  });
+});

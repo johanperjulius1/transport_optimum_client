@@ -4,6 +4,7 @@ import axios from "axios";
 
 const RouteForm = () => {
   const [routeInformation, setRouteInformation] = useState();
+  const [failureMessage, setFailureMessage] = useState("");
   const postRoute = async (event) => {
     event.preventDefault();
     try {
@@ -17,7 +18,9 @@ const RouteForm = () => {
         { headers: "Access-Control-Allow-Origin" }
       );
       setRouteInformation(response.data.routes[0].legs[0]);
+      setFailureMessage(true);
     } catch (error) {
+      setFailureMessage("Cannot find location.");
       console.log(error);
     }
   };
@@ -61,6 +64,7 @@ const RouteForm = () => {
           type="input"
           id="formDestination"
           data-cy="formDestination"
+          required
         />
         <Button
           data-cy="submit-route"
@@ -69,6 +73,13 @@ const RouteForm = () => {
           color="green"
         ></Button>
       </Form>
+      {failureMessage && (
+        <div id="failure-box" data-cy="failure-message">
+          <Message.Header id="fail-message" data-cy="fail-message">
+            {failureMessage}
+          </Message.Header>
+        </div>
+      )}
     </Container>
   );
 };
