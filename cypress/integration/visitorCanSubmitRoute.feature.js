@@ -1,10 +1,11 @@
 describe("visitor can submit route", () => {
+  const apiKey = process.env.REACT_APP_MAPSDIRECTIONS_API_KEY
   beforeEach(() => {
     cy.server();
     cy.route({
       method: "POST",
       url:
-        "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=Stockholm&destination=Orebro&key=AIzaSyAwzUCN-8dHZY6cMYq-zqL_Q9qY_8O9qlw",
+        `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=Stockholm&destination=Orebro&key=${apiKey}`,
       response: "fixture:stockholmOrebroResponse.json",
     });
     cy.visit("/");
@@ -36,7 +37,7 @@ describe("visitor can submit route", () => {
       cy.route({
         method: "POST",
         url:
-          "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=Stockholm&destination=Kotteborg&key=AIzaSyAwzUCN-8dHZY6cMYq-zqL_Q9qY_8O9qlw",
+          `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=Stockholm&destination=Ankeborg&key=${apiKey}`,
         response: { message: "Cannot find location." },
         status: 404,
       });
@@ -45,7 +46,7 @@ describe("visitor can submit route", () => {
     it("Unsuccessfully", () => {
       cy.get("[data-cy='route-form']").within(() => {
         cy.get("[data-cy='formOrigin']").type("Stockholm");
-        cy.get("[data-cy='formDestination']").type("Kotteborg");
+        cy.get("[data-cy='formDestination']").type("Ankeborg");
         cy.get("[data-cy='submit-route']").click();
       });
 

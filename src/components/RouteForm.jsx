@@ -14,7 +14,7 @@ const RouteForm = () => {
       const apiKey = process.env.REACT_APP_MAPSDIRECTIONS_API_KEY;
 
       const response = await axios.post(
-        `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=${formOrigin}&destination=${formDestination}&key=AIzaSyAwzUCN-8dHZY6cMYq-zqL_Q9qY_8O9qlw`,
+        `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=${formOrigin}&destination=${formDestination}&key=${apiKey}`,
         { headers: "Access-Control-Allow-Origin" }
       );
       setRouteInformation(response.data.routes[0].legs[0]);
@@ -29,7 +29,7 @@ const RouteForm = () => {
   return (
     <Container>
       {routeInformation && (
-        <Message className="hej" data-cy="route-information">
+        <Message data-cy="route-information">
           <Message.Header className="route" data-cy="confirmation-message">
             Your route:
             <div className="origin" data-cy="origin">
