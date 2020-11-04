@@ -21,6 +21,7 @@ const RouteForm = () => {
       setFailureMessage(true);
     } catch (error) {
       setFailureMessage("Cannot find location.");
+      setRouteInformation(false)
       console.log(error);
     }
   };
