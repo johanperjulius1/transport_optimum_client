@@ -18,7 +18,6 @@ describe("visitor can submit route", () => {
       cy.get("[data-cy='formOrigin']").type("Stockholm");
       cy.get("[data-cy='formDestination']").type("Orebro");
       cy.get("[data-cy='submit-route']").click();
-      cy.wait(8000);
     });
 
     cy.get("[data-cy='route-information']").within(() => {

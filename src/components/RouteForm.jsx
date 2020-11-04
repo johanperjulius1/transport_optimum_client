@@ -61,7 +61,6 @@ const RouteForm = () => {
           type="input"
           id="formDestination"
           data-cy="formDestination"
-          required
         />
         <Button
           data-cy="submit-route"
