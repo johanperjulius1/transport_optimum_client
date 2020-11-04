@@ -1,12 +1,12 @@
-import React from 'react'
-import RouteForm from './components/RouteForm'
+import React from "react";
+import RouteForm from "./components/RouteForm";
 
 const App = () => {
   return (
     <>
       <RouteForm />
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;
