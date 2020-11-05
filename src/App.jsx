@@ -3,10 +3,8 @@ import RouteForm from "./components/RouteForm";
 
 const App = () => {
   return (
-    <>
-      <RouteForm />
-    </>
-  );
+    <RouteForm />
+  )
 };
 
 export default App;

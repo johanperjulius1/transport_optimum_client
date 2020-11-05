@@ -5,20 +5,16 @@ describe("visitor can submit route", () => {
     cy.route({
       method: "POST",
       url:
-        `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=Stockholm&destination=Orebro&key=${apiKey}`,
+        `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=Stockholm&destination=Orebro**`,
       response: "fixture:stockholmOrebroResponse.json",
     });
     cy.visit("/");
   });
 
-  it("visitor can see route form", () => {
-    cy.get("[data-cy='route-form']").should("be.visible");
-  });
-
   it("visitor can fill in route form", () => {
     cy.get("[data-cy='route-form']").within(() => {
       cy.get("[data-cy='formOrigin']").type("Stockholm");
-      cy.get("[data-cy='formDestination']").type("Orebro");
+      cy.get("[data-cy='formDestination']").type("Örebro");
       cy.get("[data-cy='submit-route']").click();
     });
 
@@ -37,7 +33,7 @@ describe("visitor can submit route", () => {
       cy.route({
         method: "POST",
         url:
-          `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=Stockholm&destination=Ankeborg&key=${apiKey}`,
+          `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=Stockholm&destination=Ankeborg&key=**`,
         response: { message: "Cannot find location." },
         status: 404,
       });
@@ -53,7 +49,7 @@ describe("visitor can submit route", () => {
       cy.get("[data-cy='failure-message']").within(() => {
         cy.get("[data-cy='fail-message']").should(
           "contain",
-          "Cannot find location."
+          "Cannot find location, please try again with another location."
         );
         cy.get("[data-cy='route-information']").should("not.exist")
       });
