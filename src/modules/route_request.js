@@ -14,7 +14,7 @@ const getRoute = {
       );
       return response;
     } catch (error) {
-      return "Cannot find location, please try again with another location.";
+      
     }
   },
 };

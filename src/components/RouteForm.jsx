@@ -4,7 +4,7 @@ import getRoute from "../modules/route_request";
 
 const RouteForm = () => {
   const [routeInformation, setRouteInformation] = useState();
-  const [failureMessage, setFailureMessage] = useState("");
+  const [invalidLocationMessage, setInvalidLocationMessage] = useState("");
 
   const createRoute = async (event) => {
     event.preventDefault();
@@ -12,13 +12,11 @@ const RouteForm = () => {
     const from = event.target.origin.value;
     const to = event.target.destination.value;
     const response = await getRoute.create(from, to)
-    if (response.data) {
-      debugger
+    if (response.data.status !== "NOT_FOUND") {
       setRouteInformation(response.data.routes[0].legs[0]);
-      setFailureMessage("");
+      setInvalidLocationMessage("");
     } else {
-      debugger
-      setFailureMessage(response);
+      setInvalidLocationMessage("Cannot find location, please try again with another location.");
       setRouteInformation(false)
       console.log(response);
     }
@@ -27,8 +25,8 @@ const RouteForm = () => {
   return (
     <Container>
       {routeInformation && (
-        <Message data-cy="route-information">
-          <Message.Header className="route" data-cy="confirmation-message">
+        <Message data-cy="route-information-box">
+          <Message.Header className="route" data-cy="successful-request">
             Your route:
             <div className="origin" data-cy="origin">
               Starting point - {routeInformation.start_address}
@@ -72,10 +70,10 @@ const RouteForm = () => {
           color="green"
         ></Button>
       </Form>
-      {failureMessage && (
+      {invalidLocationMessage && (
         <div id="failure-box" data-cy="failure-message">
           <Message.Header id="fail-message" data-cy="fail-message">
-            {failureMessage}
+            {invalidLocationMessage}
           </Message.Header>
         </div>
       )}
