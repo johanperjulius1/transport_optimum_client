@@ -1,29 +1,26 @@
 import React, { useState } from "react";
 import { Button, Form, Container, Message } from "semantic-ui-react";
-import axios from "axios";
-import { postRoute } from "../modules/route_request";
+import getRoute from "../modules/route_request";
 
 const RouteForm = () => {
   const [routeInformation, setRouteInformation] = useState();
   const [failureMessage, setFailureMessage] = useState("");
 
-  const postRoute = async (event) => {
+  const createRoute = async (event) => {
     event.preventDefault();
-    try {
-      const formOrigin = event.target.origin.value;
-      const formDestination = event.target.destination.value;
-      const apiKey = process.env.REACT_APP_MAPSDIRECTIONS_API_KEY;
-  
-      const response = await axios.post(
-        `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=${formOrigin}&destination=${formDestination}&key=${apiKey}`,
-        { headers: "Access-Control-Allow-Origin" }
-      );
+
+    const from = event.target.origin.value;
+    const to = event.target.destination.value;
+    const response = await getRoute.create(from, to)
+    if (response.data) {
+      debugger
       setRouteInformation(response.data.routes[0].legs[0]);
-      setFailureMessage(true);
-    } catch (error) {
-      setFailureMessage("Cannot find location, please try again with another location.");
+      setFailureMessage("");
+    } else {
+      debugger
+      setFailureMessage(response);
       setRouteInformation(false)
-      console.log(error);
+      console.log(response);
     }
   }
 
@@ -49,14 +46,14 @@ const RouteForm = () => {
         </Message>
       )}
 
-      <Form data-cy="route-form" onSubmit={(event) => postRoute(event)}>
+      <Form data-cy="route-form" onSubmit={(event) => createRoute(event)}>
         <Form.Input
           label="From:"
           placeholder="Type in your location"
           name="origin"
           type="input"
-          id="formOrigin"
-          data-cy="formOrigin"
+          id="from"
+          data-cy="from"
           required
         />
         <Form.Input
@@ -64,8 +61,8 @@ const RouteForm = () => {
           placeholder="Type in your location"
           name="destination"
           type="input"
-          id="formDestination"
-          data-cy="formDestination"
+          id="to"
+          data-cy="to"
           required
         />
         <Button

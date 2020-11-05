@@ -13,8 +13,8 @@ describe("visitor can submit route", () => {
 
   it("visitor can fill in route form", () => {
     cy.get("[data-cy='route-form']").within(() => {
-      cy.get("[data-cy='formOrigin']").type("Stockholm");
-      cy.get("[data-cy='formDestination']").type("Örebro");
+      cy.get("[data-cy='from']").type("Stockholm");
+      cy.get("[data-cy='to']").type("Örebro");
       cy.get("[data-cy='submit-route']").click();
     });
 
@@ -41,8 +41,8 @@ describe("visitor can submit route", () => {
 
     it("Unsuccessfully", () => {
       cy.get("[data-cy='route-form']").within(() => {
-        cy.get("[data-cy='formOrigin']").type("Stockholm");
-        cy.get("[data-cy='formDestination']").type("Ankeborg");
+        cy.get("[data-cy='from']").type("Stockholm");
+        cy.get("[data-cy='to']").type("Ankeborg");
         cy.get("[data-cy='submit-route']").click();
       });
 
