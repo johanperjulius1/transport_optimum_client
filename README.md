@@ -1,4 +1,4 @@
-[![Build Status](https://semaphoreci.com/api/v1/grconnor/transport_optimum_client/branches/pull-request-6/badge.svg)](https://semaphoreci.com/grconnor/transport_optimum_client)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/8acdaf1f-4878-4996-acf3-e0f2ed32b74e/deploy-status)](https://app.netlify.com/sites/transport-optimum/deploys)
 
 # Transport Optimum
 
