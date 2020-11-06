@@ -2,7 +2,7 @@ import axios from "axios";
 
 const apiKey = process.env.REACT_APP_MAPSDIRECTIONS_API_KEY;
 
-const getRoute = {
+const calculateRoute = {
   async create(from, to) {
     let response;
     try {
@@ -19,4 +19,4 @@ const getRoute = {
   },
 };
 
-export default getRoute;
+export default calculateRoute;
