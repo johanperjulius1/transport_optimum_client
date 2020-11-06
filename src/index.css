@@ -1,0 +1,35 @@
+#failure-box {
+  padding-top: 10px;
+}
+
+#fail-message {
+  color: red;
+}
+
+.route {
+  color: black;
+}
+
+.origin {
+  color: green;
+  padding-top: 2%;
+  font-size: 120%;
+}
+
+.destination {
+  color: green;
+  padding-top: 0.5%;
+  font-size: 120%;
+}
+
+.route-distance {
+  color: blue;
+  padding-top: 1%;
+  font-size: 90%;
+}
+
+.route-time {
+  color: blue;
+  padding-top: 0.5%;
+  font-size: 90%;
+}
