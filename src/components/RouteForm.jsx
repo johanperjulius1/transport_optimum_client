@@ -12,10 +12,12 @@ const RouteForm = () => {
     const from = event.target.origin.value;
     const to = event.target.destination.value;
     const response = await calculateRoute.create(from, to);
-    if (response.data.status !== "NOT_FOUND") {
+    if (response === "Request failed with status code 400") {
+      setInvalidLocationMessage("Request failed with status code 400")
+    } else if (response.data.status !== "NOT_FOUND") {
       setRouteInformation(response.data.routes[0].legs[0]);
       setInvalidLocationMessage("");
-    } else {
+    } else if (response.data.status === "NOT_FOUND") {
       setInvalidLocationMessage(
         "Cannot find location, please try again with another location."
       );

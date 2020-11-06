@@ -11,9 +11,14 @@ const calculateRoute = {
         {
           headers: "Access-Control-Allow-Origin",
         }
-      );
+      ); 
       return response;
-    } catch (error) {}
+    } catch (error) {debugger
+      response = error.message
+      return response
+    } finally {
+      return response
+    }
   },
 };
 
