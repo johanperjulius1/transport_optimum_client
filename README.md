@@ -1,3 +1,5 @@
+[![Build Status](https://semaphoreci.com/api/v1/grconnor/transport_optimum_client/branches/pull-request-6/badge.svg)](https://semaphoreci.com/grconnor/transport_optimum_client)
+
 # Transport Optimum
 
 # Purpose:
