@@ -13,10 +13,8 @@ const calculateRoute = {
         }
       );
       return response;
-    } catch (error) {
-      
-    }
+    } catch (error) {}
   },
 };
 
-export default calculateRoute;
+export { calculateRoute };
