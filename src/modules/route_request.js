@@ -1,25 +1,24 @@
 import axios from "axios";
-
 const apiKey = process.env.REACT_APP_MAPSDIRECTIONS_API_KEY;
+const headers = "Access-Control-Allow-Origin";
 
-const calculateRoute = {
+const Route = {
   async create(from, to) {
     let response;
     try {
-      response = await axios.post(
-        `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=${from}&destination=${to}&key=${apiKey}`,
+      response = await axios(
+        "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json",
         {
-          headers: "Access-Control-Allow-Origin",
+          params: { origin: from, destination: to, key: apiKey },
         }
-      ); 
+      );
       return response;
-    } catch (error) {debugger
-      response = error.message
-      return response
+    } catch (error) {
+      response = error.message;
+      return response;
     } finally {
-      return response
+      return response;
     }
   },
 };
-
-export { calculateRoute };
+export { Route };

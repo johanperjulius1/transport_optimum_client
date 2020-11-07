@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Form, Container, Message } from "semantic-ui-react";
-import { calculateRoute } from "../modules/route_request";
+import { Route } from "../modules/route_request";
 
 const RouteForm = () => {
   const [routeInformation, setRouteInformation] = useState();
@@ -11,7 +11,7 @@ const RouteForm = () => {
 
     const from = event.target.origin.value;
     const to = event.target.destination.value;
-    const response = await calculateRoute.create(from, to);
+    const response = await Route.create(from, to);
     if (response === "Request failed with status code 400") {
       setInvalidLocationMessage("Request failed with status code 400")
     } else if (response.data.status !== "NOT_FOUND") {
