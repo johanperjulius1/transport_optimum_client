@@ -19,7 +19,7 @@ const RouteForm = () => {
 
     } else if (response.data.status !== "OK") {
       setInvalidLocationMessage(
-        "Cannot find location. Please try again with another location."
+        "Sorry, we don't have that location. Please try again with another location."
       );
       setRouteInformation(false);
       console.log(response);

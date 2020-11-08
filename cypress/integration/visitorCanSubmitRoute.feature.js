@@ -38,7 +38,7 @@ describe("visitor can submit route", () => {
       });
     });
 
-    it("Unsuccessfully", () => {
+    it("Unsuccessfully with invalid location", () => {
       cy.get("[data-cy='route-form']").within(() => {
         cy.get("[data-cy='from']").type("Stockholm");
         cy.get("[data-cy='to']").type("Ankeborg");
@@ -48,7 +48,7 @@ describe("visitor can submit route", () => {
       cy.get("[data-cy='failure-message']").within(() => {
         cy.get("[data-cy='fail-message']").should(
           "contain",
-          "Cannot find location, please try again with another location."
+          "Sorry, we don't have that location. Please try again with another location."
         );
         cy.get("[data-cy='route-information-box']").should("not.exist")
       });
