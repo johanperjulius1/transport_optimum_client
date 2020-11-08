@@ -1,5 +1,6 @@
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import { useState, useEffect } from "react";
+import { Container } from "semantic-ui-react";
 
 const Map = () => {
   const [currentPosition, setCurrentPosition] = useState({});
@@ -25,23 +26,25 @@ const Map = () => {
   };
 
   return (
-    <div className="map" data-cy="map">
-      <LoadScript googleMapsApiKey={apiKey}>
-        <GoogleMap
-          mapContainerStyle={mapStyles}
-          zoom={13}
-          center={currentPosition}
-        >
-          {currentPosition.lat ? (
-            <Marker
-              position={currentPosition}
-              onDragEnd={(e) => onMarkerDragEnd(e)}
-              draggable={true}
-            />
-          ) : null}
-        </GoogleMap>
-      </LoadScript>
-    </div>
+    <Container>
+      <div className="map" data-cy="map">
+        <LoadScript googleMapsApiKey={apiKey}>
+          <GoogleMap
+            mapContainerStyle={mapStyles}
+            zoom={13}
+            center={currentPosition}
+          >
+            {currentPosition.lat ? (
+              <Marker
+                position={currentPosition}
+                onDragEnd={(e) => onMarkerDragEnd(e)}
+                draggable={true}
+              />
+            ) : null}
+          </GoogleMap>
+        </LoadScript>
+      </div>
+    </Container>
   );
 };
 
