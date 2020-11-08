@@ -1,13 +1,18 @@
 import React, { useState } from "react";
 import { Button, Form, Container, Message } from "semantic-ui-react";
 import { Route } from "../modules/route_request";
+import Map from "./Map"
 
 const RouteForm = () => {
   const [routeInformation, setRouteInformation] = useState();
   const [invalidLocationMessage, setInvalidLocationMessage] = useState("");
+  const [from, setFrom] = useState()
+  const [to, setTo] = useState()
 
   const createRoute = async (event) => {
     event.preventDefault();
+    setFrom(event.target.origin.value)
+    setTo(event.target.destination.value)
 
     const from = event.target.origin.value;
     const to = event.target.destination.value;
@@ -85,6 +90,8 @@ const RouteForm = () => {
           </Message.Header>
         </div>
       )}
+
+      <Map from={from} to={to}/>
     </Container>
   );
 };
