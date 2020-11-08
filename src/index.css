@@ -6,8 +6,9 @@
   color: red;
 }
 
-.route {
+.box {
   color: black;
+  padding-top: 4%;
 }
 
 .origin {
@@ -36,4 +37,8 @@
 
 .map {
   padding-top: 5%;
+}
+
+#menu {
+background-color: whitesmoke;
 }

@@ -31,7 +31,7 @@ const RouteForm = () => {
   };
 
   return (
-    <Container>
+    <Container className="box" data-cy="box">
       {routeInformation && (
         <Message data-cy="route-information-box">
           <Message.Header className="route" data-cy="successful-request">

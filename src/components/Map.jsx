@@ -31,7 +31,7 @@ const Map = () => {
         <LoadScript googleMapsApiKey={apiKey}>
           <GoogleMap
             mapContainerStyle={mapStyles}
-            zoom={13}
+            zoom={10}
             center={currentPosition}
           >
             {currentPosition.lat ? (
