@@ -54,6 +54,7 @@ const RouteForm = () => {
 
       <Form data-cy="route-form" onSubmit={(event) => createRoute(event)}>
         <Form.Input
+        icon="shipping fast" iconPosition="left"
           label="From:"
           placeholder="Type in your location"
           name="origin"
@@ -63,6 +64,7 @@ const RouteForm = () => {
           required
         />
         <Form.Input
+        icon="warehouse" iconPosition="left"
           label="To:"
           placeholder="Type in your location"
           name="destination"

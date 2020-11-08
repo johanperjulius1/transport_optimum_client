@@ -6,7 +6,7 @@ const Navbar = () => {
     <div>
         <Header className="navigation-bar" data-cy="navigation-bar">
           <Menu id="menu">
-          <Menu.Item data-cy="transport-optimum" name="transport-optimum">
+          <Menu.Item data-cy="transport-optimum" name="transport-optimum" icon="shipping fast" iconPosition="left">
               Transport Optimum
             </Menu.Item>
           </Menu>
