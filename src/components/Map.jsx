@@ -38,7 +38,7 @@ const Map = ({ from, to }) => {
     <Container>
       <div className="map-container" data-cy="map-container">
         <LoadScript googleMapsApiKey={apiKey}>
-          <GoogleMap
+          <GoogleMap data-cy="map"
             mapContainerStyle={mapStyles}
             zoom={10}
             center={currentPosition}
@@ -51,7 +51,7 @@ const Map = ({ from, to }) => {
               />
             ) : null}
             {directions && (
-              <DirectionsRenderer
+              <DirectionsRenderer data-cy="map-renderer"
                 options={{
                   directions: directions,
                 }}
