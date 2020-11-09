@@ -1,8 +1,15 @@
-import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  LoadScript,
+  Marker,
+  DirectionsRenderer,
+  DirectionsService,
+} from "@react-google-maps/api";
 import { useState, useEffect } from "react";
 import { Container } from "semantic-ui-react";
 
-const Map = () => {
+const Map = ({ from, to }) => {
+  const [directions, setDirections] = useState();
   const [currentPosition, setCurrentPosition] = useState({});
   const apiKey = process.env.REACT_APP_MAPSDIRECTIONS_API_KEY;
   const success = (position) => {
@@ -24,7 +31,9 @@ const Map = () => {
     height: "80vh",
     width: "100%",
   };
-
+  const directionsCallback = (response) => {
+    if (response !== null) setDirections(response);
+  };
   return (
     <Container>
       <div className="map-container" data-cy="map-container">
@@ -41,6 +50,23 @@ const Map = () => {
                 draggable={true}
               />
             ) : null}
+            {directions && (
+              <DirectionsRenderer
+                options={{
+                  directions: directions,
+                }}
+              />
+            )}
+            {from && to && (
+              <DirectionsService
+                options={{
+                  destination: from,
+                  origin: to,
+                  travelMode: "DRIVING",
+                }}
+                callback={directionsCallback}
+              />
+            )}
           </GoogleMap>
         </LoadScript>
       </div>

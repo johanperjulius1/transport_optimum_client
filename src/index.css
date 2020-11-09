@@ -8,7 +8,7 @@
 
 .box {
   color: black;
-  padding-top: 4%;
+  padding-top: 3%;
 }
 
 .origin {
@@ -35,8 +35,8 @@
   font-size: 90%;
 }
 
-.map {
-  padding-top: 5%;
+.map-container {
+  padding-top: 4%;
 }
 
 #menu {
