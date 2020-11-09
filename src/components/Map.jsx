@@ -27,7 +27,7 @@ const Map = () => {
 
   return (
     <Container>
-      <div className="map" data-cy="map">
+      <div className="map-container" data-cy="map-container">
         <LoadScript googleMapsApiKey={apiKey}>
           <GoogleMap
             mapContainerStyle={mapStyles}
