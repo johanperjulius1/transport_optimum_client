@@ -1,5 +1,5 @@
 describe("visitor can submit route", () => {
-  context("Successfully with valid locations", () => {
+  context("Successfully", () => {
     beforeEach(() => {
       cy.server();
       cy.route({
@@ -15,7 +15,7 @@ describe("visitor can submit route", () => {
       cy.visit("/");
     });
 
-    it("visitor can fill in route form, see route on map and receive a price estimate", () => {
+    it("visitor filles in form with valid locations", () => {
       cy.get("[data-cy='route-form']").within(() => {
         cy.get("[data-cy='from']").type("Stockholm");
         cy.get("[data-cy='to']").type("Örebro");
@@ -48,7 +48,7 @@ describe("visitor can submit route", () => {
       cy.visit("/");
     });
 
-    it("Unsuccessfully with invalid location", () => {
+    it("with invalid locations", () => {
       cy.get("[data-cy='route-form']").within(() => {
         cy.get("[data-cy='from']").type("Stockholm");
         cy.get("[data-cy='to']").type("Ankeborg");

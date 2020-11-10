@@ -1,7 +1,7 @@
 import axios from "axios";
-import { create } from "react-test-renderer";
 
 const apiKey = process.env.REACT_APP_MAPSDIRECTIONS_API_KEY;
+
 let apiUrl;
 if (process.env.NODE_ENV === "production") {
   apiUrl = "https://transport-optimum.herokuapp.com/api/v1";
@@ -27,7 +27,7 @@ const Route = {
       });
       if (response.data.status === "OK") {
         result = response.data.routes[0];
-      } else { 
+      } else {
         throw new Error(
           "Something went wrong. Try again with another location."
         );

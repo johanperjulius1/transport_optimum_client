@@ -21,14 +21,12 @@ const RouteForm = () => {
     const response = await Route.create(from, to);
 
     if (typeof response === "object") {
-
       setPrice(await Route.getPrice(response.legs[0].distance.value))
       setRouteInformation(response.legs[0]);
     } else {
       setInvalidLocationMessage(response)
       setRouteInformation(false)
     }
-
   };
 
   return (
@@ -59,7 +57,6 @@ const RouteForm = () => {
           </Message.Header>
         </div>
       )}
-
       <Form data-cy="route-form" onSubmit={(event) => createRoute(event)}>
         <Form.Input
           icon="shipping fast" iconPosition="left"

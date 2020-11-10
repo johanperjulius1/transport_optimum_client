@@ -34,11 +34,13 @@ const Map = ({ from, to }) => {
   const directionsCallback = (response) => {
     if (response !== null) setDirections(response);
   };
+  
   return (
     <Container>
       <div className="map-container" data-cy="map-container">
         <LoadScript googleMapsApiKey={apiKey}>
-          <GoogleMap data-cy="map"
+          <GoogleMap
+            data-cy="map"
             mapContainerStyle={mapStyles}
             zoom={10}
             center={currentPosition}
@@ -51,7 +53,8 @@ const Map = ({ from, to }) => {
               />
             ) : null}
             {directions && (
-              <DirectionsRenderer data-cy="map-renderer"
+              <DirectionsRenderer
+                data-cy="map-renderer"
                 options={{
                   directions: directions,
                 }}
