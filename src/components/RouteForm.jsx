@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { Button, Form, Container, Message } from "semantic-ui-react";
 import { Route } from "../modules/route_request";
 import Map from './Map';
+import TotalPrice from "./TotalPrice";
 
 const RouteForm = () => {
   const [routeInformation, setRouteInformation] = useState();
   const [invalidLocationMessage, setInvalidLocationMessage] = useState("");
   const [from, setFrom] = useState()
   const [to, setTo] = useState()
+  const [distanceInMeters, setDistanceInMeters] = useState()
 
 
   const createRoute = async (event) => {
@@ -33,6 +35,7 @@ const RouteForm = () => {
     else if (response.data.status === "OK") {
       setRouteInformation(response.data.routes[0].legs[0]);
       setInvalidLocationMessage("");
+      setDistanceInMeters(response.data.routes[0].legs[0].distance.value)
     }
   };
 
@@ -93,8 +96,10 @@ const RouteForm = () => {
           </Message.Header>
         </div>
       )}
+       {<TotalPrice distanceInMeters={distanceInMeters}/>}
       {<Map from={from} to={to}/>}
     </Container>
+    
   );
 };
 

@@ -9,7 +9,7 @@ describe("visitor can submit route", () => {
     cy.visit("/");
   });
 
-  it("visitor can fill in route form", () => {
+  it("visitor can fill in route form, see route on map and receive a price estimate", () => {
     cy.get("[data-cy='route-form']").within(() => {
       cy.get("[data-cy='from']").type("Stockholm");
       cy.get("[data-cy='to']").type("Örebro");
@@ -23,6 +23,7 @@ describe("visitor can submit route", () => {
         cy.get("[data-cy='route-time']").should("contain", "2 hours 12 min");
       });
     });
+    cy.get("[data-cy='total-price']").should("contain", "Our price estimate for this routes is SEK 201561")
   });
 
   xcontext("Unsuccessfully", () => {
