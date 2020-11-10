@@ -5,11 +5,14 @@ import "semantic-ui-css/semantic.min.css";
 import reportWebVitals from "./reportWebVitals";
 import "./index.css";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+let apiUrl;
+if (process.env.NODE_ENV === "production") {
+  apiUrl = "https://transport-optimum.herokuapp.com/api/v1";
+} else {
+  apiUrl = "http://localhost:3000/api/v1";
+}
+axios.defaults.baseURL = apiUrl;
+
+ReactDOM.render(<App />, document.getElementById("root"));
 
 reportWebVitals();
