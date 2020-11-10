@@ -1,13 +1,19 @@
 import React, { useState } from "react";
 import { Button, Form, Container, Message } from "semantic-ui-react";
 import { Route } from "../modules/route_request";
+import Map from './Map';
 
 const RouteForm = () => {
   const [routeInformation, setRouteInformation] = useState();
   const [invalidLocationMessage, setInvalidLocationMessage] = useState("");
+  const [from, setFrom] = useState()
+  const [to, setTo] = useState()
+
 
   const createRoute = async (event) => {
     event.preventDefault();
+    setFrom(event.target.origin.value)
+    setTo(event.target.destination.value)
 
     const from = event.target.origin.value;
     const to = event.target.destination.value;
@@ -31,7 +37,7 @@ const RouteForm = () => {
   };
 
   return (
-    <Container>
+    <Container className="box" data-cy="box">
       {routeInformation && (
         <Message data-cy="route-information-box">
           <Message.Header className="route" data-cy="successful-request">
@@ -54,6 +60,7 @@ const RouteForm = () => {
 
       <Form data-cy="route-form" onSubmit={(event) => createRoute(event)}>
         <Form.Input
+        icon="shipping fast" iconPosition="left"
           label="From:"
           placeholder="Type in your location"
           name="origin"
@@ -63,6 +70,7 @@ const RouteForm = () => {
           required
         />
         <Form.Input
+        icon="warehouse" iconPosition="left"
           label="To:"
           placeholder="Type in your location"
           name="destination"
@@ -85,6 +93,7 @@ const RouteForm = () => {
           </Message.Header>
         </div>
       )}
+      {<Map from={from} to={to}/>}
     </Container>
   );
 };
