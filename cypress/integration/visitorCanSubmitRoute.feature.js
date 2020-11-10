@@ -6,7 +6,13 @@ describe("visitor can submit route", () => {
       url: `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=*`,
       response: "fixture:stockholmOrebroResponse.json",
     });
-    cy.visit("/");
+      cy.route({
+        method: "POST",
+        url: "http://localhost:3000/api/v1/distance",
+        response: "",
+      });
+      cy.visit("/");
+    });
   });
 
   it("visitor can fill in route form, see route on map and receive a price estimate", () => {
@@ -23,7 +29,8 @@ describe("visitor can submit route", () => {
         cy.get("[data-cy='route-time']").should("contain", "2 hours 12 min");
       });
     });
-    // cy.get("[data-cy='total-price']").should("contain", "Our price estimate for this routes is SEK 201561")
+    
+    cy.get("[data-cy='total-price']").should("contain", "Our price estimate for this routes is SEK 201561")
   });
 
   xcontext("Unsuccessfully", () => {
@@ -53,4 +60,3 @@ describe("visitor can submit route", () => {
       });
     });
   });
-});

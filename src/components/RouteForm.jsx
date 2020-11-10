@@ -19,7 +19,8 @@ const RouteForm = () => {
 
     const from = event.target.origin.value;
     const to = event.target.destination.value;
-    const response = await Route.create(from, to);
+    const response = await Route.create(from, to, distance);
+    const distance = false
 
     if (response.status !== 200) {
       setInvalidLocationMessage("Something went wrong. Try again with another location.")
@@ -37,6 +38,9 @@ const RouteForm = () => {
       setInvalidLocationMessage("");
       setDistanceInMeters(response.data.routes[0].legs[0].distance.value)
     }
+
+    if (setDistanceInMeters(response.data.routes[0].legs[0].distance.value)=== true)
+    const distance = response.data.routes[0].legs[0].distance.value
   };
 
   return (
