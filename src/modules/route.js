@@ -12,10 +12,10 @@ axios.defaults.baseURL = apiUrl;
 
 const Route = {
   async create(from, to) {
-    let response;
+    let result;
 
     try {
-      response = await axios({
+      let response = await axios({
         method: "post",
         url:
           "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json",
@@ -25,35 +25,35 @@ const Route = {
           key: apiKey,
         },
       });
-      return response;
-    } catch (error) {
-      response = error.message;
-      return response;
-    } finally {
-      return response;
-    }
-  },
- 
-  async create(distance) {
-    let result;
-    try {
-      result = await axios({
-        method: "post",
-        url:`${apiUrl}/distance`,
-        params: {distance: distance 
-
-        },
-      });
-      return result;
+      if (response.data.status === "OK") {
+        result = response.data.routes[0];
+      } else { 
+        throw new Error(
+          "Something went wrong. Try again with another location."
+        );
+      }
     } catch (error) {
       result = error.message;
-      return result;
     } finally {
       return result;
     }
   },
 
-  }
-
+  async getPrice(distance) {
+    let result;
+    try {
+      let response = await axios({
+        method: "post",
+        url: `${apiUrl}/distance`,
+        params: { distance: distance },
+      });
+      result = response.data.price;
+    } catch (error) {
+      result = error.message;
+    } finally {
+      return result;
+    }
+  },
+};
 
 export { Route };

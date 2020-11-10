@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import { Button, Form, Container, Message } from "semantic-ui-react";
-import { Route } from "../modules/route_request";
+import { Route } from "../modules/route";
 import Map from './Map';
 import TotalPrice from "./TotalPrice";
 
 const RouteForm = () => {
   const [routeInformation, setRouteInformation] = useState();
-  const [invalidLocationMessage, setInvalidLocationMessage] = useState("");
+  const [invalidLocationMessage, setInvalidLocationMessage] = useState();
   const [from, setFrom] = useState()
   const [to, setTo] = useState()
-  const [distanceInMeters, setDistanceInMeters] = useState()
-
+  const [price, setPrice] = useState()
 
   const createRoute = async (event) => {
     event.preventDefault();
@@ -19,28 +18,17 @@ const RouteForm = () => {
 
     const from = event.target.origin.value;
     const to = event.target.destination.value;
-    const response = await Route.create(from, to, distance);
-    const distance = false
+    const response = await Route.create(from, to);
 
-    if (response.status !== 200) {
-      setInvalidLocationMessage("Something went wrong. Try again with another location.")
-      console.log(response);
+    if (typeof response === "object") {
 
-    } else if (response.data.status !== "OK") {
-      setInvalidLocationMessage(
-        "Sorry, we don't have that location. Please try again with another location."
-      );
-      setRouteInformation(false);
-      console.log(response);
-    }
-    else if (response.data.status === "OK") {
-      setRouteInformation(response.data.routes[0].legs[0]);
-      setInvalidLocationMessage("");
-      setDistanceInMeters(response.data.routes[0].legs[0].distance.value)
+      setPrice(await Route.getPrice(response.legs[0].distance.value))
+      setRouteInformation(response.legs[0]);
+    } else {
+      setInvalidLocationMessage(response)
+      setRouteInformation(false)
     }
 
-    if (setDistanceInMeters(response.data.routes[0].legs[0].distance.value)=== true)
-    const distance = response.data.routes[0].legs[0].distance.value
   };
 
   return (
@@ -64,10 +52,17 @@ const RouteForm = () => {
           </Message.Header>
         </Message>
       )}
+      {invalidLocationMessage && (
+        <div id="failure-box" data-cy="failure-message">
+          <Message.Header id="fail-message" data-cy="fail-message">
+            {invalidLocationMessage}
+          </Message.Header>
+        </div>
+      )}
 
       <Form data-cy="route-form" onSubmit={(event) => createRoute(event)}>
         <Form.Input
-        icon="shipping fast" iconPosition="left"
+          icon="shipping fast" iconPosition="left"
           label="From:"
           placeholder="Type in your location"
           name="origin"
@@ -77,7 +72,7 @@ const RouteForm = () => {
           required
         />
         <Form.Input
-        icon="warehouse" iconPosition="left"
+          icon="warehouse" iconPosition="left"
           label="To:"
           placeholder="Type in your location"
           name="destination"
@@ -93,17 +88,10 @@ const RouteForm = () => {
           color="green"
         ></Button>
       </Form>
-      {invalidLocationMessage && (
-        <div id="failure-box" data-cy="failure-message">
-          <Message.Header id="fail-message" data-cy="fail-message">
-            {invalidLocationMessage}
-          </Message.Header>
-        </div>
-      )}
-       {<TotalPrice distanceInMeters={distanceInMeters}/>}
-      {<Map from={from} to={to}/>}
+      {price && <TotalPrice price={price} />}
+      {<Map from={from} to={to} />}
     </Container>
-    
+
   );
 };
 
