@@ -36,7 +36,7 @@ const Route = {
     try {
       let response = await axios({
         method: "post",
-        url: "/distance",
+        url: "/prices",
         params: { distance: distance },
       });
       result = response.data.price;

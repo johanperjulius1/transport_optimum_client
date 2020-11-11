@@ -9,7 +9,7 @@ describe("visitor can submit route", () => {
       });
       cy.route({
         method: "POST",
-        url: "http://localhost:3000/api/v1/distance?**",
+        url: "http://localhost:3000/api/v1/prices?**",
         response: { price: 12345 },
       });
       cy.visit("/");
