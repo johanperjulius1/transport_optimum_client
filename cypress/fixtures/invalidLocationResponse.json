@@ -1,0 +1,17 @@
+{
+  "geocoded_waypoints": [
+      {
+          "geocoder_status": "OK",
+          "place_id": "ChIJywtkGTF2X0YRZnedZ9MnDag",
+          "types": [
+              "locality",
+              "political"
+          ]
+      },
+      {
+          "geocoder_status": "ZERO_RESULTS"
+      }
+  ],
+  "routes": [],
+  "status": "NOT_FOUND"
+}
