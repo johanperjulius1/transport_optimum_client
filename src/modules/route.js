@@ -2,14 +2,6 @@ import axios from "axios";
 
 const apiKey = process.env.REACT_APP_MAPSDIRECTIONS_API_KEY;
 
-let apiUrl;
-if (process.env.NODE_ENV === "production") {
-  apiUrl = "https://transport-optimum.herokuapp.com/api/v1";
-} else {
-  apiUrl = "http://localhost:3000/api/v1";
-}
-axios.defaults.baseURL = apiUrl;
-
 const Route = {
   async create(from, to) {
     let result;
@@ -44,7 +36,7 @@ const Route = {
     try {
       let response = await axios({
         method: "post",
-        url: `${apiUrl}/distance`,
+        url: "/distance",
         params: { distance: distance },
       });
       result = response.data.price;
