@@ -1,31 +1,34 @@
 import React, { useState } from "react";
 import { Button, Form, Container, Message } from "semantic-ui-react";
 import { Route } from "../modules/route";
-import Map from './Map';
+import Map from "./Map";
 import TotalPrice from "./TotalPrice";
+import { Segment } from 'semantic-ui-react'
 
 const RouteForm = () => {
   const [routeInformation, setRouteInformation] = useState();
   const [invalidLocationMessage, setInvalidLocationMessage] = useState();
-  const [from, setFrom] = useState()
-  const [to, setTo] = useState()
-  const [price, setPrice] = useState()
+  const [from, setFrom] = useState();
+  const [to, setTo] = useState();
+  const [price, setPrice] = useState();
 
   const createRoute = async (event) => {
     event.preventDefault();
-    setFrom(event.target.origin.value)
-    setTo(event.target.destination.value)
+    setFrom(event.target.origin.value);
+    setTo(event.target.destination.value);
 
     const from = event.target.origin.value;
     const to = event.target.destination.value;
     const response = await Route.create(from, to);
 
     if (typeof response === "object") {
-      setPrice(await Route.getPrice(response.legs[0].distance.value))
+      setPrice(await Route.getPrice(response.legs[0].distance.value));
       setRouteInformation(response.legs[0]);
+      setInvalidLocationMessage(false);
     } else {
-      setInvalidLocationMessage(response)
-      setRouteInformation(false)
+      setInvalidLocationMessage(response);
+      setRouteInformation(false);
+      setPrice(false);
     }
   };
 
@@ -51,15 +54,16 @@ const RouteForm = () => {
         </Message>
       )}
       {invalidLocationMessage && (
-        <div id="failure-box" data-cy="failure-message">
+        <Segment id="failure-box" data-cy="failure-message">
           <Message.Header id="fail-message" data-cy="fail-message">
             {invalidLocationMessage}
           </Message.Header>
-        </div>
+        </Segment>
       )}
       <Form data-cy="route-form" onSubmit={(event) => createRoute(event)}>
         <Form.Input
-          icon="shipping fast" iconPosition="left"
+          icon="shipping fast"
+          iconPosition="left"
           label="From:"
           placeholder="Type in your location"
           name="origin"
@@ -69,7 +73,8 @@ const RouteForm = () => {
           required
         />
         <Form.Input
-          icon="warehouse" iconPosition="left"
+          icon="warehouse"
+          iconPosition="left"
           label="To:"
           placeholder="Type in your location"
           name="destination"
@@ -88,7 +93,6 @@ const RouteForm = () => {
       {price && <TotalPrice price={price} />}
       {<Map from={from} to={to} />}
     </Container>
-
   );
 };
 

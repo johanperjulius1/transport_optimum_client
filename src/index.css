@@ -2,8 +2,13 @@
   padding-top: 10px;
 }
 
+#failure-box {
+ padding-bottom: 2%;
+}
+
 #fail-message {
   color: red;
+
 }
 
 .box {
@@ -41,4 +46,12 @@
 
 #menu {
 background-color: whitesmoke;
+}
+
+.total-price {
+  color: green;
+}
+
+.navigation-bar {
+ 
 }
