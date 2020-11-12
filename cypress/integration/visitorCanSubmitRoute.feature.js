@@ -32,7 +32,7 @@ describe("visitor can submit route", () => {
 
       cy.get("[data-cy='total-price']").should(
         "contain",
-        "Our price estimate for this routes is SEK 12345"
+        "Our price estimate for this routes is SEK: 12345"
       );
     });
   });
